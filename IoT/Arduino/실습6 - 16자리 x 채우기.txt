@@ -1,0 +1,37 @@
+#include <SoftwareSerial.h>
+SoftwareSerial BTSerial(2,3);
+ 
+byte buffer[1024];
+int bufferPosition;
+int i;
+ 
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  BTSerial.begin(9600);
+  Serial.println("ready");
+  bufferPosition = 0;
+}
+ 
+void loop() {
+ // put your main code here, to run repeatedly:
+  if(Serial.available()){
+    getchar();
+    byte data = Serial.read();
+    
+     if(data != '\n'){
+      buffer[bufferPosition++] = data;
+    }
+ 
+    if(data=='\n'){
+        for(i = bufferPosition; i < 15; i++){
+          buffer[i] = 'X';
+      }
+        buffer[15] = '\0';
+        
+         BTSerial.write(buffer, i);
+         BTSerial.write("\n");
+         bufferPosition = 0;
+    }
+  }
+}

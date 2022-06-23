@@ -1,0 +1,26 @@
+void setup() {
+    lcd.init();         // lcd 초기화
+    lcd.backlight();    // lcd 백라이트 켜기
+    Serial.begin(9600);     //통신속도 9600 bit
+}
+
+void loop() {
+    //wait a bit for entire message to arrive
+    delay(100);
+
+    lcd.clear();    //지우는거
+
+    String szTemp;
+    //read all The available characters
+    while(Serial.available() > 0) {
+        char cRead = Serial.read();
+        szTemp += cRead;
+    }
+
+    if(szTemp) {
+        lcd.print(szTemp);  //출력
+    }
+}
+
+
+
