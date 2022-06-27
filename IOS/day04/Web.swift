@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Web
 //
-//  Created by Dongduk1 on 2022/06/27.
+//  Created by Hyein on 2022/06/27.
 //
 
 import UIKit
